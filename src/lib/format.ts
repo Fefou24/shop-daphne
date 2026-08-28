@@ -1,0 +1,13 @@
+export function formatPrice(value: number, currency = "EUR"): string {
+  return new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency,
+  }).format(value);
+}
+
+export function formatDate(iso: string): string {
+  return new Intl.DateTimeFormat("fr-FR", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(new Date(iso));
+}

@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Beauty Concept — Design tokens
+   Palette dérivée du logo (bleu poudré) + photos produits (crème, rose)
+   ============================================================ */
+:root {
+  --cream: #faf6f1;
+  --cream-deep: #f3ebe1;
+  --sand: #ece1d3;
+  --ink: #2c3a42;
+  --ink-soft: #5b6b73;
+  --muted: #8b9aa1;
+  --line: #e7ddd2;
+
+  --blue: #6f97ac;
+  --blue-deep: #4f7689;
+  --blue-soft: #cfe0e8;
+  --blush: #e2a3ab;
+  --blush-soft: #f5dee1;
+  --gold: #c8a96a;
+
+  --background: var(--cream);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-sand: var(--sand);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-blue: var(--blue);
+  --color-blue-deep: var(--blue-deep);
+  --color-blue-soft: var(--blue-soft);
+  --color-blush: var(--blush);
+  --color-blush-soft: var(--blush-soft);
+  --color-gold: var(--gold);
+
+  --font-sans: var(--font-poppins);
+  --font-serif: var(--font-cormorant);
+}
+
+* {
+  border-color: var(--line);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+/* Utilitaires de marque */
+.section-title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--blue-deep);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--ink); }
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+}
+.btn-outline:hover { background: var(--ink); color: #fff; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fade-up 0.6s ease both; }
+
+/* Révélation au scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Flottement doux (décorations) */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float 5s ease-in-out infinite; }
+.animate-float-slow { animation: float 8s ease-in-out infinite; }
+
+/* Micro-interaction boutons */
+.btn { transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; }
+.btn-primary:hover { box-shadow: 0 8px 20px -8px rgba(44, 58, 66, 0.5); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-float, .animate-float-slow, .animate-fade-up { animation: none; }
+}
